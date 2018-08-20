@@ -113,7 +113,9 @@ namespace GrowlToToast.Growler
             };
 
             p.Start();
-            p.StandardInput.WriteLine(JsonConvert.SerializeObject(bread));
+            StreamWriter utf8Writer = new StreamWriter(p.StandardInput.BaseStream, new UTF8Encoding(false));
+            utf8Writer.WriteLine(JsonConvert.SerializeObject(bread));
+            utf8Writer.Close();
             p.StandardInput.Flush();
         }
 
